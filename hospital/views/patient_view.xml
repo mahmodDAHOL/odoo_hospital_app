@@ -31,6 +31,24 @@
         </field>
     </record>
 
+    <record id="hospital_patient_view_search" model="ir.ui.view">
+        <field name="name">hospital_patient.view.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" string="Patient Name" filter_domain="['|',('name','like',self),('age','=',self)]"></field>
+                <field name="age"></field>
+                <field name="gender"></field>
+                <filter name="Male" string="Male" domain="[('gender', '=', 'male')]" />
+                <filter name="Female" string="Female" domain="[('gender', '=', 'female')]" />
+                <separator/>
+                <filter name="Kids" string="Kids" domain="[('age', '&lt;=', 5)]" />
+                <group name="0" string="Group By">
+                    <filter name="group_by_gender" string="Gender" context="{'group_by':'gender'}" />
+                </group>
+            </search>
+        </field>
+    </record>
     <record id="hospital_patient_action" model="ir.actions.act_window">
         <field name="name">Patient</field>
         <field name="res_model">hospital.patient</field>
