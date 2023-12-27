@@ -13,6 +13,7 @@
                         </group>
                         <group>
                             <field name="gender"></field>
+                            <field name="active"></field>
                         </group>
                     </group>
                 </sheet>
@@ -39,10 +40,11 @@
                 <field name="name" string="Patient Name" filter_domain="['|',('name','like',self),('age','=',self)]"></field>
                 <field name="age"></field>
                 <field name="gender"></field>
-                <filter name="Male" string="Male" domain="[('gender', '=', 'male')]" />
-                <filter name="Female" string="Female" domain="[('gender', '=', 'female')]" />
+                <filter name="male" string="Male" domain="[('gender', '=', 'male')]" />
+                <filter name="female" string="Female" domain="[('gender', '=', 'female')]" />
                 <separator/>
-                <filter name="Kids" string="Kids" domain="[('age', '&lt;=', 5)]" />
+                <filter name="kids" string="Kids" domain="[('age', '&lt;=', 5)]" />
+                <filter name="archived" string="Archived" invisible="1" domain="[('active', '=', not set)]" />
                 <group name="0" string="Group By">
                     <filter name="group_by_gender" string="Gender" context="{'group_by':'gender'}" />
                 </group>
@@ -53,6 +55,7 @@
         <field name="name">Patient</field>
         <field name="res_model">hospital.patient</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_male':1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first patient
