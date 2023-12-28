@@ -9,7 +9,8 @@
     'license': 'LGPL-3',
     'category': 'Hospital',
     'depends': [
-        'base'
+        'base',
+        'mail'
     ],
     'data': [
         'security/ir.model.access.csv',
