@@ -12,5 +12,11 @@
         parent="hospital_root_menu"
         sequence="0" />
 
+    <menuitem
+        id="appointment_master_menu"
+        name="Appointments"
+        parent="hospital_root_menu"
+        sequence="0" />
+
 
 </odoo>
