@@ -5,21 +5,38 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    <field name="state" widget="statusbar" nolabel="1" options="{'clickable':'1'}"
+                        statusbar_visible="draft,in_consultation,done" />
+                </header>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="priority" widget="priority" />
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field name="patient_id" />
                             <field name="booking_date" />
+                            <field name="gender" />
                         </group>
                         <group>
                             <field name="appointment_time" />
-                            <field name="gender" />
                         </group>
                     </group>
+                    <notebook>
+                        <page name="prescription" string="Prescription">
+                            <field name="prescription" placeholder="Enter your prescription" />
+                        </page>
+                        <page name="pharmacy" string="Pharmacy">
+
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user"/>
-                    <field name="message_ids"/>
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
                 </div>
             </form>
         </field>
@@ -28,10 +45,19 @@
         <field name="name">hospital_appointment.view.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree string="">
+            <tree decoration-success="state == 'done'"
+                decoration-info="state == 'draft'"
+                decoration-danger="state == 'cancel'"
+                decoration-muted="state == 'in_consultation'"
+            >
                 <field name="patient_id" />
                 <field name="appointment_time" />
                 <field name="booking_date" />
+                <field name="state" decoration-success="state == 'done'"
+                    decoration-info="state == 'draft'"
+                    decoration-danger="state == 'cancel'"
+                    decoration-muted="state == 'in_consultation'"
+                    widget='badge' />
             </tree>
         </field>
     </record>
