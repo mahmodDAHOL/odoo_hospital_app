@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 class HospitalAppointment(models.Model):
-    _inherit = 'mail.thread'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _name = 'hospital.appointment'
     _description = 'Hospital appointment'
     _rec_name = 'patient_id'
