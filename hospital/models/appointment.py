@@ -23,3 +23,4 @@ class HospitalAppointment(models.Model):
         ('done','Done'),
         ('cancel','Cancelled')], string="Status"
     )
+    doctor_id = fields.Many2one('res.users', string="Doctor")

@@ -19,6 +19,7 @@
                         <group>
                             <field name="patient_id" />
                             <field name="booking_date" />
+                            <field name="doctor_id" />
                             <field name="gender" />
                         </group>
                         <group>
@@ -52,6 +53,7 @@
                 decoration-muted="state == 'in_consultation'"
             >
                 <field name="patient_id" />
+                <field name="doctor_id" widget='many2one_avatar_user'/>
                 <field name="appointment_time" />
                 <field name="booking_date" />
                 <field name="activity_ids" widget='list_activity'/>
