@@ -6,8 +6,17 @@
         <field name="arch" type="xml">
             <form string="">
                 <header>
-                    <field name="state" widget="statusbar" nolabel="1" options="{'clickable':'1'}"
+                    <field name="state" widget="statusbar" nolabel="1"
                         statusbar_visible="draft,in_consultation,done" />
+                    <button string="In Consultation" name="action_in_consultation" type="object"
+                        invisible="state != 'draft'" class="oe_highlight" />
+                    <button string="Mark as done" name="action_done" type="object"
+                        invisible="state != 'in_consultation' " data-hotkey='v' class="oe_highlight" />
+                    <button string="Cancel" name="action_cancel" type="object"
+                        invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
+                        class="oe_highlight" />
+                    <button string="Reset to draft" name="action_draft" type="object"
+                        invisible="state != 'cancel'" data-hotkey='n' class="oe_highlight" />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -52,12 +61,13 @@
                 decoration-danger="state == 'cancel'"
                 decoration-muted="state == 'in_consultation'"
                 sample="1"
+                multi_edit="1"
             >
                 <field name="patient_id" />
-                <field name="doctor_id" widget='many2one_avatar_user'/>
+                <field name="doctor_id" widget='many2one_avatar_user' />
                 <field name="appointment_time" />
                 <field name="booking_date" />
-                <field name="activity_ids" widget='list_activity'/>
+                <field name="activity_ids" widget='list_activity' />
                 <field name="state" decoration-success="state == 'done'"
                     decoration-info="state == 'draft'"
                     decoration-danger="state == 'cancel'"
