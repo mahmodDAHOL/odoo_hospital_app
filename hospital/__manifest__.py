@@ -10,7 +10,8 @@
     'category': 'Hospital',
     'depends': [
         'base',
-        'mail'
+        'mail',
+        'product'
     ],
     'data': [
         'security/ir.model.access.csv',
