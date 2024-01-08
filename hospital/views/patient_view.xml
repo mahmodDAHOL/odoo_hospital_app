@@ -14,6 +14,7 @@
                             <field name="date_of_birth"></field>
                         </group>
                         <group>
+                            <field name="ref"></field>
                             <field name="gender"></field>
                             <field name="active"></field>
                         </group>
@@ -32,6 +33,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="name" string="Patient Name"></field>
+                <field name="ref"></field>
                 <field name="age"></field>
                 <field name="gender"></field>
             </tree>

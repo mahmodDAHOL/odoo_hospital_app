@@ -10,10 +10,21 @@ class HospitalPatient(models.Model):
     
     name = fields.Text(string='Name', tracking=True)
     date_of_birth = fields.Date(string='Data of birth')
+    ref = fields.Char(string="Reference")
     age = fields.Integer(string='Age', compute= '_compute_age', tracking=True)
     gender = fields.Selection([('male','Male'),('female','Female')], string='Gender', tracking=True)
     active  = fields.Boolean(string="Active", default=True)
     image  = fields.Image(string="Image")
+
+    @api.model
+    def create(self, vals):
+        vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
+        return super(HospitalPatient, self).create(vals)
+
+    def write(self, vals):
+        if not self.ref and not vals.get('ref'):
+            vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.patient')
+        return super(HospitalPatient, self).write(vals)
     
     @api.depends('date_of_birth')
     def _compute_age(self):
