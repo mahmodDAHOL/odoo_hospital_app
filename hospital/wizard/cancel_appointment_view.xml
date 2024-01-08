@@ -11,6 +11,7 @@
                         <field name="reason" />
                     </group>
                     <group>
+                        <field name="cancel_date" />
                     </group>
                 </group>
                 <footer>
