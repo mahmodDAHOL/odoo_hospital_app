@@ -12,9 +12,13 @@
                         invisible="state != 'draft'" class="oe_highlight" />
                     <button string="Mark as done" name="action_done" type="object"
                         invisible="state != 'in_consultation' " data-hotkey='v' class="oe_highlight" />
-                    <button string="Cancel" name="action_cancel" type="object"
+                    <button string="Cancel" name="%(hospital.cancel_appointment_action)d" type="action"
+                        context="{'hide_appointment':1}"
                         invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
                         class="oe_highlight" />
+                    <!-- <button string="Cancel" name="action_cancel" type="object"
+                        invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
+                        class="oe_highlight" /> -->
                     <button string="Reset to draft" name="action_draft" type="object"
                         invisible="state != 'cancel'" data-hotkey='n' class="oe_highlight" />
                 </header>
