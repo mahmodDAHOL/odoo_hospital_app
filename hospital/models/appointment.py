@@ -1,12 +1,13 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 class HospitalAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _name = 'hospital.appointment'
     _description = 'Hospital appointment'
-    _rec_name = 'patient_id'
+    _rec_name = 'ref'
     
     patient_id = fields.Many2one('hospital.patient', string='Patient')
+    ref = fields.Char(string="Reference")
     gender = fields.Selection(related='patient_id.gender')
     appointment_time = fields.Datetime(string='Appointment time', default=fields.Datetime.now())
     booking_date = fields.Datetime(string='Booking date', default=fields.Date.context_today) 
@@ -27,7 +28,18 @@ class HospitalAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string="Doctor")
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.line', 'appointment_id', string='Pharmacy')
     hide_sales_price = fields.Boolean(string="Hide sales price")
+
     
+    @api.model
+    def create(self, vals):
+        vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
+        return super(HospitalAppointment, self).create(vals)
+
+    def write(self, vals):
+        if not self.ref and not vals.get('ref'):
+            vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
+        return super(HospitalAppointment, self).write(vals)
+        
     def action_in_consultation(self):
         for rec in self:
             rec.state = "in_consultation"

@@ -19,6 +19,9 @@
                         invisible="state != 'cancel'" data-hotkey='n' class="oe_highlight" />
                 </header>
                 <sheet>
+                    <h1>
+                        <field name="ref" />
+                    </h1>
                     <div class="oe_title">
                         <h1>
                             <field name="priority" widget="priority" />
