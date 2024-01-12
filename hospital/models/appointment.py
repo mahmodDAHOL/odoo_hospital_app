@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 class HospitalAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -6,7 +7,7 @@ class HospitalAppointment(models.Model):
     _description = 'Hospital appointment'
     _rec_name = 'ref'
     
-    patient_id = fields.Many2one('hospital.patient', string='Patient')
+    patient_id = fields.Many2one('hospital.patient', string='Patient', ondelete='cascade')
     ref = fields.Char(string="Reference", readonly=True)
     gender = fields.Selection(related='patient_id.gender')
     appointment_time = fields.Datetime(string='Appointment time', default=fields.Datetime.now())
@@ -35,6 +36,11 @@ class HospitalAppointment(models.Model):
         vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
         return super(HospitalAppointment, self).create(vals)
 
+    def unlink(self):
+        if self.state != 'draft':
+            raise ValidationError("You can delete appointment only in draft state.")
+        return super(HospitalAppointment, self).unlink()
+        
     def write(self, vals):
         if not self.ref and not vals.get('ref'):
             vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
