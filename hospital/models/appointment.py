@@ -7,7 +7,7 @@ class HospitalAppointment(models.Model):
     _rec_name = 'ref'
     
     patient_id = fields.Many2one('hospital.patient', string='Patient')
-    ref = fields.Char(string="Reference")
+    ref = fields.Char(string="Reference", readonly=True)
     gender = fields.Selection(related='patient_id.gender')
     appointment_time = fields.Datetime(string='Appointment time', default=fields.Datetime.now())
     booking_date = fields.Datetime(string='Booking date', default=fields.Date.context_today) 
@@ -23,7 +23,7 @@ class HospitalAppointment(models.Model):
         ('in_consultation','In Consultation'),
         ('done','Done'),
         ('cancel','Cancelled')], string="Status",
-        tracking=True
+        default='draft', tracking=True
     )
     doctor_id = fields.Many2one('res.users', string="Doctor")
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.line', 'appointment_id', string='Pharmacy')
