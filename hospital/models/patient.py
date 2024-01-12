@@ -15,6 +15,12 @@ class HospitalPatient(models.Model):
     gender = fields.Selection([('male','Male'),('female','Female')], string='Gender', tracking=True)
     active  = fields.Boolean(string="Active", default=True)
     image  = fields.Image(string="Image")
+    parent = fields.Char(string='Parent')
+    marital_status = fields.Selection([
+        ('married','Married'),
+        ('single','Single'),
+    ], string="Marital", tracking=True)
+    partner_name = fields.Char(string="Parent name")
 
     @api.model
     def create(self, vals):
