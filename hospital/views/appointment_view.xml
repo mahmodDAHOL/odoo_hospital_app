@@ -12,7 +12,8 @@
                         invisible="state != 'draft'" class="oe_highlight" />
                     <button string="Mark as done" name="action_done" type="object"
                         invisible="state != 'in_consultation' " data-hotkey='v' class="oe_highlight" />
-                    <button string="Cancel" name="%(hospital.cancel_appointment_action)d" type="action"
+                    <button string="Cancel" name="%(hospital.cancel_appointment_action)d"
+                        type="action"
                         context="{'hide_appointment':1}"
                         invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
                         class="oe_highlight" />
@@ -107,6 +108,9 @@
                 sample="1"
                 multi_edit="1"
             >
+                <header>
+                    <button string="In Consultation" name="action_in_consultation" type="object" />
+                </header>
                 <field name="patient_id" />
                 <field name="doctor_id" widget='many2one_avatar_user' />
                 <field name="appointment_time" />
@@ -117,6 +121,13 @@
                     decoration-danger="state == 'cancel'"
                     decoration-muted="state == 'in_consultation'"
                     widget='badge' />
+                <button name="action_done" class="fa fa-check btn-success" type="object"
+                    invisible="state != 'in_consultation' " />
+                <button name="%(hospital.cancel_appointment_action)d"
+                    type="action"
+                    context="{'hide_appointment':1}"
+                    invisible="state not in ['draft', 'in_consultation']"
+                    class="fa fa-times btn-danger" />
             </tree>
         </field>
     </record>
