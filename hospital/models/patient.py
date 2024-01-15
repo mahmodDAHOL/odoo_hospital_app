@@ -12,7 +12,8 @@ class HospitalPatient(models.Model):
     name = fields.Text(string='Name', tracking=True)
     date_of_birth = fields.Date(string='Data of birth')
     ref = fields.Char(string="Reference")
-    age = fields.Integer(string='Age', compute= '_compute_age', inverse='_inverse_compute_age', tracking=True)
+    age = fields.Integer(string='Age', compute= '_compute_age', inverse='_inverse_compute_age',
+                         search='_search_age', tracking=True)
     gender = fields.Selection([('male','Male'),('female','Female')], string='Gender', tracking=True)
     appointment_id = fields.Many2one('hospital.appointment', string="Appointment")
     active  = fields.Boolean(string="Active", default=True)
@@ -62,3 +63,10 @@ class HospitalPatient(models.Model):
         today = date.today()
         for rec in self:
             rec.date_of_birth = today - relativedelta.relativedelta(years=rec.age)
+            
+    def _search_age(self, operator, value):
+        """Allow to search by age"""
+        date_of_birth = date.today() - relativedelta.relativedelta(years=value)
+        start_of_year = date_of_birth.replace(day=1, month=1)
+        end_of_year = date_of_birth.replace(day=31, month=12)
+        return [('date_of_birth', '>=', start_of_year), ('date_of_birth', '<=', end_of_year)]
