@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.hospital</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Hospital" string="Hospital" name="hospital">
+                    <block title="Hospital Management" name="employees_setting_container">
+                        <setting id="hospital_setting" string="Cancellation befor">
+                            <div class="content-group" name="hr_presence_options">
+                                <div class="d-flex">
+                                    <field name="cancel_days" class="ml16"/>
+                                    <label for="cancel_days" class="o_light_label"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hospital_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'hospital', 'bin_size': False}</field>
+    </record>
+
+    <menuitem id="hospital_config_settings_menu"
+        name="Settings"
+        parent="hospital.configuration_menu"
+        sequence="0"
+        action="hospital_config_settings_action"
+        groups="base.group_system"/>
+</odoo>
