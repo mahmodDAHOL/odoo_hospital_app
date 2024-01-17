@@ -4,3 +4,4 @@ access.hospital.appointment,access_hospital_appointment,hospital.model_hospital_
 access.appointment.pharmacy.line,access_appointment_pharmacy_line,hospital.model_appointment_pharmacy_line,,1,1,1,1
 access.patient.tag,access_patient_tag,hospital.model_patient_tag,,1,1,1,1
 access.cancel.appointment.wizard,access_cancel_appointment_wizard,hospital.model_cancel_appointment_wizard,,1,1,1,1
+access.hospital.operation,access_hospital_operation,hospital.model_hospital_operation,,1,1,1,1

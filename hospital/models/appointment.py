@@ -29,6 +29,7 @@ class HospitalAppointment(models.Model):
     doctor_id = fields.Many2one('res.users', string="Doctor")
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.line', 'appointment_id', string='Pharmacy')
     hide_sales_price = fields.Boolean(string="Hide sales price")
+    operation = fields.Many2one('hospital.operation', string="Operation")
 
     
     @api.model

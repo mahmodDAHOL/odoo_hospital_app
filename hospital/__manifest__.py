@@ -24,6 +24,7 @@
         'views/appointment_view.xml',
         'views/patient_tag_view.xml',
         'views/res_config_settings_views.xml',
+        'views/operation_view.xml',
     ],
 
     'installable': True,

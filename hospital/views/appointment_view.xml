@@ -42,6 +42,7 @@
                         <group>
                             <field name="hide_sales_price" />
                             <field name="appointment_time" />
+                            <field name="operation" />
                         </group>
                     </group>
                     <notebook>
