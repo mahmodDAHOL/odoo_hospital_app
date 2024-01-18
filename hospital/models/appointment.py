@@ -6,6 +6,7 @@ class HospitalAppointment(models.Model):
     _name = 'hospital.appointment'
     _description = 'Hospital appointment'
     _rec_name = 'ref'
+    _order = 'id desc'
     
     patient_id = fields.Many2one('hospital.patient', string='Patient', ondelete='cascade')
     ref = fields.Char(string="Reference", readonly=True)
