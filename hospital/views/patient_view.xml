@@ -12,6 +12,7 @@
                             <field name="name"></field>
                             <field name="age"></field>
                             <field name="date_of_birth"></field>
+                            <field name="tag_ids" widget="many2many_tags"></field>
                         </group>
                         <group>
                             <field name="ref"></field>
@@ -40,8 +41,10 @@
             <tree string="">
                 <field name="name" string="Patient Name"></field>
                 <field name="ref"></field>
-                <field name="age"></field>
+                <field name="age" avg="Average Age"></field>
+                <field name="appointment_count" sum="Total Appointment"></field>
                 <field name="gender"></field>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"></field>
             </tree>
         </field>
     </record>
