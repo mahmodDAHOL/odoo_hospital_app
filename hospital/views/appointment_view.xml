@@ -145,6 +145,7 @@
                 <groupby name='patient_id'>
                     <button name="edit" type="edit" icon="fa-edit" title="Edit"/>
                 </groupby>
+                <field name="progress" widget='progressbar' />
             </tree>
         </field>
     </record>

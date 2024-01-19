@@ -31,8 +31,8 @@ class HospitalAppointment(models.Model):
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.line', 'appointment_id', string='Pharmacy')
     hide_sales_price = fields.Boolean(string="Hide sales price")
     operation = fields.Many2one('hospital.operation', string="Operation")
+    progress = fields.Integer(string="Progress", compute="_compute_progress")
 
-    
     @api.model
     def create(self, vals):
         vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
@@ -65,6 +65,19 @@ class HospitalAppointment(models.Model):
         for rec in self:
             rec.state = "draft"
             
+    @api.depends('state')
+    def _compute_progress(self):
+        for rec in self:
+            if rec.state == 'draft':
+                progress = 25
+            elif rec.state == 'in_consultation':
+                progress = 50
+            elif rec.state == 'done':
+                progress = 100
+            else:
+                progress = 0
+            rec.progress = progress
+        
 class AppointmentPharmacyLine(models.Model):
     _name = 'appointment.pharmacy.line'
     _description = "Appointment Pharmacy Line"
