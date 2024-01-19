@@ -31,9 +31,16 @@
                             <field name="is_birthday" />
                         </group>
                         <group string="Other Information" name="other_info">
-                            <field name="parent" invisible="age &gt; 18"></field>
-                            <field name="marital_status" invisible="age &lt; 18"></field>
-                            <field name="partner_name" readonly="marital_status != 'married'" required="marital_status == 'married'"></field>
+                            <group>
+                                <field name="parent" invisible="age &gt; 18"></field>
+                                <field name="marital_status" invisible="age &lt; 18"></field>
+                                <field name="partner_name" readonly="marital_status != 'married'" required="marital_status == 'married'"></field>
+                            </group>
+                            <group>
+                                <field name="phone" widget="phone"/>
+                                <field name="email" widget="email"/>
+                                <field name="website" widget="website"/>
+                            </group>
                         </group>
                     </group>
                 </sheet>

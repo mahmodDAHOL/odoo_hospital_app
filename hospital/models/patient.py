@@ -28,6 +28,9 @@ class HospitalPatient(models.Model):
     ], string="Marital", tracking=True)
     partner_name = fields.Char(string="Partner name")
     is_birthday = fields.Boolean(string="Birthday ?", compute="_compute_is_birthday")
+    phone = fields.Char(string="Phone")
+    email = fields.Char(string="Email")
+    website = fields.Char(string="Website")
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
