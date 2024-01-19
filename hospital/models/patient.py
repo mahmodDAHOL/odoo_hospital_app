@@ -27,6 +27,7 @@ class HospitalPatient(models.Model):
         ('single','Single'),
     ], string="Marital", tracking=True)
     partner_name = fields.Char(string="Partner name")
+    is_birthday = fields.Boolean(string="Birthday ?", compute="_compute_is_birthday")
 
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
@@ -70,3 +71,13 @@ class HospitalPatient(models.Model):
         start_of_year = date_of_birth.replace(day=1, month=1)
         end_of_year = date_of_birth.replace(day=31, month=12)
         return [('date_of_birth', '>=', start_of_year), ('date_of_birth', '<=', end_of_year)]
+
+    @api.depends('date_of_birth')
+    def _compute_is_birthday(self):
+        for rec in self:
+            is_birthday = False
+            if rec.date_of_birth:
+                today = date.today()
+                if today.day == rec.date_of_birth.day and today.month == rec.date_of_birth.month:
+                    is_birthday = True
+            rec.is_birthday = is_birthday

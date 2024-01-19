@@ -6,6 +6,15 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
+                    <div class="alert alert-info text-center o_form_header" role="alert"
+                        invisible="is_birthday == False">
+                        <a class="close" data-dismis="alert" href="#">x</a>
+                        <div>
+                            <strong>Today is Birthday !</strong>
+                        </div>
+                        <div>Wish <field name="name" readonly="1"></field>
+                        </div>
+                    </div>
                     <field name="image" widget="image" class="oe_avatar"></field>
                     <group>
                         <group>
@@ -19,6 +28,7 @@
                             <field name="gender" invisible="context.get('hide_gender')"></field>
                             <field name="active"></field>
                             <field name="appointment_count" readonly="1" />
+                            <field name="is_birthday" />
                         </group>
                         <group string="Other Information" name="other_info">
                             <field name="parent" invisible="age &gt; 18"></field>
