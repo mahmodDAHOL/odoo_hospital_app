@@ -1,6 +1,6 @@
 from datetime import date
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from dateutil import relativedelta
 
@@ -91,3 +91,14 @@ class HospitalPatient(models.Model):
                 if today.day == rec.date_of_birth.day and today.month == rec.date_of_birth.month:
                     is_birthday = True
             rec.is_birthday = is_birthday
+    
+    def view_appointments_action(self):
+        return {
+            'name': _('Appointment'),
+            'res_model': 'hospital.appointment',
+            'view_mode': 'list,form,calendar,activity',
+            'context': {'default_patient_id': self.id},
+            'domain': [('patient_id', '=', self.id)],
+            'target': 'current',
+            'type': 'ir.actions.act_window'
+        }

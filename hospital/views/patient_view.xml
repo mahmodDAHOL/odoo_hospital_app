@@ -6,6 +6,11 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="view_appointments_action" type="object" class="oe_stat_button" icon="fa-star">
+                            <field name="appointment_count" string="Appointment" widget="statinfo"/>
+                        </button>
+                    </div>
                     <div class="alert alert-info text-center o_form_header" role="alert"
                         invisible="is_birthday == False">
                         <a class="close" data-dismis="alert" href="#">x</a>
@@ -27,7 +32,6 @@
                             <field name="ref"></field>
                             <field name="gender" invisible="context.get('hide_gender')"></field>
                             <field name="active"></field>
-                            <field name="appointment_count" readonly="1" />
                             <field name="is_birthday" />
                         </group>
                         <group string="Other Information" name="other_info">
