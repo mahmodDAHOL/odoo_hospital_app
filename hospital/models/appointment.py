@@ -60,6 +60,13 @@ class HospitalAppointment(models.Model):
     def action_done(self):
         for rec in self:
             rec.state = "done"
+        return {
+            'effect': {
+                'fadeout','slow',
+                'message','Done',
+                'type','rainbow_man'
+            }
+        }
     
     def action_cancel(self):
         action = self.env.ref('hospital.cancel_appointment_action').read()[0]
