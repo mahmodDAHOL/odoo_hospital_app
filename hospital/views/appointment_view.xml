@@ -50,12 +50,14 @@
                             <field name="booking_date" />
                             <field name="doctor_id" />
                             <field name="gender" />
+                            <field name="company_id" groups="base.group_multi_company" />
                         </group>
                         <group>
                             <field name="hide_sales_price" />
                             <field name="appointment_time" />
                             <field name="duration" />
                             <field name="operation" />
+                            <field name="currency_id" groups="base.group_multi_currency" />
                         </group>
                     </group>
                     <notebook>
@@ -66,9 +68,12 @@
                             <field name="pharmacy_line_ids">
                                 <tree editable="bottom">
                                     <field name="product_id" />
-                                    <field name="price"
+                                    <field name="price" widget="monetary"
+                                        options="{'currency_field':'company_currency_id'}"
                                         column_invisible="parent.hide_sales_price==True" />
                                     <field name="qty" />
+                                    <field name="company_currency_id" invisible="1" />
+                                    <field name="price_subtotal" />
                                 </tree>
                                 <form>
                                     <group>
