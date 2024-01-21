@@ -36,7 +36,9 @@ class HospitalAppointment(models.Model):
 
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', related='company_id.currency_id')
-    
+    amount_total = fields.Float(string="Total", compute="_compute_amount_total",
+                                    currency_field='company_currency_id')
+
     @api.model
     def create(self, vals):
         vals['ref'] = self.env['ir.sequence'].next_by_code('hospital.appointment')
@@ -88,7 +90,15 @@ class HospitalAppointment(models.Model):
             else:
                 progress = 0
             rec.progress = progress
-        
+ 
+    @api.depends('pharmacy_line_ids.price_subtotal')
+    def _compute_amount_total(self):
+        for appointment in self:
+            total = 0
+            for rec in appointment.pharmacy_line_ids:
+                total += rec.price_subtotal
+            appointment.amount_total = total
+
 class AppointmentPharmacyLine(models.Model):
     _name = 'appointment.pharmacy.line'
     _description = "Appointment Pharmacy Line"

@@ -72,8 +72,8 @@
                                         options="{'currency_field':'company_currency_id'}"
                                         column_invisible="parent.hide_sales_price==True" />
                                     <field name="qty" />
-                                    <field name="company_currency_id" invisible="1" />
-                                    <field name="price_subtotal" />
+                                    <field name="company_currency_id" column_invisible="True" invisible="1" />
+                                    <field name="price_subtotal" sum="Total"/>
                                 </tree>
                                 <form>
                                     <group>
@@ -132,6 +132,7 @@
                 </header>
                 <field name="patient_id" />
                 <field name="doctor_id" widget='many2one_avatar_user' />
+                <field name="gender" decoration-it="1" decoration-bf="1" />
                 <field name="appointment_time" />
                 <field name="booking_date" />
                 <field name="activity_ids" widget='list_activity' />
@@ -151,7 +152,10 @@
                 <groupby name='patient_id'>
                     <button name="edit" type="edit" icon="fa-edit" title="Edit"/>
                 </groupby>
-                <field name="progress" widget='progressbar' />
+                <field name="amount_total" widget="monetary"
+                        options="{'currency_field':'currency_id'}" decoration-bf="1" />
+                <field name="progress" widget='progressbar' />  
+                <field name="currency_id" column_invisible="True" invisible="1" />
             </tree>
         </field>
     </record>
