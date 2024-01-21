@@ -29,6 +29,8 @@
                         context="{'hide_appointment':1}"
                         invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
                         class="oe_highlight" />
+                    <button string="Share In Whatsapp" name="share_whatsapp_action" type="object"
+                        data-hotkey="w" icon="fa-whatsapp" class="oe_highlight"/>
                     <!-- <button string="Cancel" name="action_cancel" type="object"
                         invisible="state not in ['draft', 'in_consultation']" data-hotkey='z'
                         class="oe_highlight" /> -->

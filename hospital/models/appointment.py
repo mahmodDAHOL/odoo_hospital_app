@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class HospitalAppointment(models.Model):
@@ -99,6 +99,17 @@ class HospitalAppointment(models.Model):
                 total += rec.price_subtotal
             appointment.amount_total = total
 
+    def share_whatsapp_action(self):
+        if not self.patient_id.phone:
+            raise ValidationError(_("Missing phone number in patient record"))
+        message = f"Hi {self.patient_id.name}, your *appointment* number is {self.ref}, Thank you"
+        whatsapp_api_url = f"https://api.whatsapp.com/send?phone={self.patient_id.phone}&text={message}"
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': whatsapp_api_url
+        }
+
 class AppointmentPharmacyLine(models.Model):
     _name = 'appointment.pharmacy.line'
     _description = "Appointment Pharmacy Line"
@@ -116,3 +127,4 @@ class AppointmentPharmacyLine(models.Model):
     def _compute_price_subtotal(self):
         for rec in self:
             rec.price_subtotal = rec.price * rec.qty
+    
