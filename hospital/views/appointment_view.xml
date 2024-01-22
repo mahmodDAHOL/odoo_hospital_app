@@ -71,7 +71,7 @@
                                 <tree editable="bottom">
                                     <field name="product_id" />
                                     <field name="price" widget="monetary"
-                                        options="{'currency_field':'company_currency_id'}"
+                                        options="{'currency_field':'company_currency_id', 'field_digits': True}"
                                         column_invisible="parent.hide_sales_price==True" />
                                     <field name="qty" />
                                     <field name="company_currency_id" column_invisible="True" invisible="1" />
